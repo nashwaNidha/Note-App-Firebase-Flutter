@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "326934688061",
+    "project_id": "crud-noteapp-5d028",
+    "storage_bucket": "crud-noteapp-5d028.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326934688061:android:e6fed441ddc133c43b1554",
+        "android_client_info": {
+          "package_name": "com.example.fb_noteapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZVs7dF34XBt8jmblROTvK2SNXFHRjs8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
