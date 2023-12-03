@@ -1,3 +1,5 @@
+import 'package:email_validator/email_validator.dart';
+
 import 'package:fb_noteapp/screens/homepage.dart';
 import 'package:fb_noteapp/screens/reg_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,6 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final fireauth = FirebaseAuth.instance;
   TextEditingController email = TextEditingController();
   TextEditingController pass = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   void loginFn() async {
     try {
@@ -30,49 +33,86 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: SizedBox(
-                height: 100,
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: TextField(
-                  decoration: const InputDecoration(hintText: "Email"),
-                  controller: email,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Sign In",
+                style: TextStyle(fontSize: 40),
+              ),
+              Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SizedBox(
+                    height: 100,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: TextFormField(
+                      decoration: const InputDecoration(hintText: "Email"),
+                      controller: email,
+                      validator: (value) {
+                        final bool isValid =
+                            EmailValidator.validate(value.toString());
+                        return isValid ? null : "Enter a valid Email";
+                      },
+                    ),
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: SizedBox(
-                height: 100,
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: TextField(
-                  decoration: const InputDecoration(hintText: "Password"),
-                  controller: pass,
+              Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SizedBox(
+                    height: 100,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: TextField(
+                      decoration: const InputDecoration(hintText: "Password"),
+                      controller: pass,
+                    ),
+                  ),
                 ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                loginFn();
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => HomePage(),
-                ));
-              },
-              child: const Text("Login"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const RegScreen(),
-                ));
-              },
-              child: const Text("Go to Registration"),
-            )
-          ],
+              Align(
+                  alignment: Alignment.bottomRight,
+                  child: InkWell(
+                    onTap: () {
+                      // Navigator.of(context)
+                      //     .push(MaterialPageRoute(
+                      //   builder: (context) => NewPassword(),
+                      // ));
+                    },
+                    child: const Text("Forgot Password?",
+                        style: TextStyle(color: Colors.black87)),
+                  )),
+              ElevatedButton(
+                onPressed: () {
+                  loginFn();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => HomePage(),
+                  ));
+                },
+                child: const Text("Login"),
+              ),
+              Row(
+                children: [
+                  const Text("Don't have an Account?"),
+                  InkWell(
+                      onTap: () {
+                        _formKey.currentState!.validate();
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const RegScreen(),
+                        ));
+                      },
+                      child: const Text(
+                        "Sign Up",
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ))
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

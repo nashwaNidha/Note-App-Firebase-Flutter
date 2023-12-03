@@ -9,12 +9,15 @@ import '../themes/color_picker.dart';
 class EditNotes extends StatefulWidget {
   final String docId;
   final String currentNote;
+  final String currentDesc;
+
   final int currentcolor;
   const EditNotes(
       {super.key,
       required this.docId,
       required this.currentNote,
-      required this.currentcolor});
+      required this.currentcolor,
+      required this.currentDesc});
 
   @override
   State<EditNotes> createState() => _EditNotesState();
@@ -22,7 +25,9 @@ class EditNotes extends StatefulWidget {
 
 class _EditNotesState extends State<EditNotes> {
   final FirestoreService fireStoreService = FirestoreService();
-  TextEditingController noteController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descController = TextEditingController();
+
   @override
   void initState() {
     Provider.of<ColorProvider>(context, listen: false).setindextoZero();
@@ -34,7 +39,7 @@ class _EditNotesState extends State<EditNotes> {
   void dispose() {
     super.dispose();
 
-    noteController.dispose();
+    titleController.dispose();
   }
 
   void iskk() {
@@ -46,58 +51,100 @@ class _EditNotesState extends State<EditNotes> {
   Widget build(BuildContext context) {
     final themeData = Provider.of<ColorProvider>(context, listen: true);
 
-    noteController.text = widget.currentNote;
-
+    titleController.text = widget.currentNote;
+    descController.text = widget.currentDesc;
     var newColor;
     newColor = themeData.isSelected
         ? bgColor[themeData.selectedIndex]
         : bgColor[widget.currentcolor];
 
-    return WillPopScope(
-      onWillPop: () async {
-        await fireStoreService.updateData(
-            widget.docId, noteController.text, themeData.selectedIndex);
-        themeData.isSelectedFalse();
-        return true;
-      },
-      child: Scaffold(
-        backgroundColor: newColor,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            await fireStoreService.updateData(
-                widget.docId, noteController.text, themeData.selectedIndex);
-            themeData.isSelectedFalse();
+    return Scaffold(
+      backgroundColor: newColor,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await fireStoreService.updateData(
+              widget.docId, titleController.text, themeData.selectedIndex);
+          themeData.isSelectedFalse();
+          titleController.clear();
 
-            Navigator.of(context).pop();
-          },
-        ),
-        appBar: AppBar(title: const Text("edit Note")),
-        body: Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 100,
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: TextField(
-                  autocorrect: true,
-                  controller: noteController,
-                ),
+          Navigator.of(context).pop();
+        },
+      ),
+      appBar: AppBar(title: const Text("Edit Note")),
+      body: Padding(
+        padding: const EdgeInsets.all(25.0),
+        child: Column(
+          // children: [
+          //   const Align(
+          //     alignment: Alignment.centerLeft,
+          //     child: Text(
+          //       "Title",
+          //       style: TextStyle(fontSize: 40),
+          //     ),
+          //   ),
+          //   SizedBox(
+          //     height: 100,
+          //     width: MediaQuery.of(context).size.width * 0.8,
+          //     child: TextField(
+          //       autocorrect: true,
+          //       controller: titleController,
+          //     ),
+          //   ),
+          children: [
+            SizedBox(
+              height: 100,
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: TextField(
+                autocorrect: true,
+                decoration: InputDecoration(hintText: "Title"),
+                controller: titleController,
               ),
-              InkWell(
-                  onTap: () {
-                    showModalBottomSheet<void>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return ColorPicker(themeData: themeData);
-                        });
-                  },
-                  child: Container(
-                      width: 60,
-                      decoration: BoxDecoration(color: Colors.grey[200]),
-                      child: Center(child: const Text("Color"))))
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 100,
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: TextField(
+                autocorrect: true,
+                maxLines: null,
+                decoration: InputDecoration(
+                  hintText: "Description",
+                  border: InputBorder.none,
+                ),
+                controller: descController,
+              ),
+            ),
+
+            InkWell(
+                onTap: () {
+                  showModalBottomSheet<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return ColorPicker(themeData: themeData);
+                      });
+                },
+                child: Container(
+                    width: 80,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(10)),
+                    child: const Center(
+                      child: Text("Color"),
+                    )))
+
+            // InkWell(
+            //     onTap: () {
+            //       showModalBottomSheet<void>(
+            //           context: context,
+            //           builder: (BuildContext context) {
+            //             return ColorPicker(themeData: themeData);
+            //           });
+            //     },
+            //     child: Container(
+            //         width: 60,
+            //         decoration: BoxDecoration(color: Colors.grey[200]),
+            //         child: Center(child: const Text("Color"))))
+          ],
         ),
       ),
     );
