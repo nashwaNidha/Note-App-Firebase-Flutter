@@ -20,6 +20,6 @@ const saveSuccessSnackbar = SnackBar(
     style: TextStyle(color: Colors.black),
   ),
   closeIconColor: Colors.white,
-  backgroundColor: Color.fromARGB(255, 72, 248, 77),
+  backgroundColor: Color.fromARGB(255, 28, 153, 32),
   showCloseIcon: true,
 );

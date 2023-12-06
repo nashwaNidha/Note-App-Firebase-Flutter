@@ -59,6 +59,10 @@ class _EditNotesState extends State<EditNotes> {
         : bgColor[widget.currentcolor];
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Edit Note"),
+        backgroundColor: newColor,
+      ),
       backgroundColor: newColor,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -69,8 +73,8 @@ class _EditNotesState extends State<EditNotes> {
 
           Navigator.of(context).pop();
         },
+        child: const Icon(Icons.save_alt_outlined),
       ),
-      appBar: AppBar(title: const Text("Edit Note")),
       body: Padding(
         padding: const EdgeInsets.all(25.0),
         child: Column(
