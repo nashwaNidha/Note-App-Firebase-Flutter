@@ -15,7 +15,8 @@ class FirestoreService {
     });
   }
 
-  Future<void> updateData(String id, String title, int colorIndex) async {
+  Future<void> updateData(
+      String id, String title, String descData, int colorIndex) async {
     FirebaseFirestore.instance
         .collection('NoteApp')
         .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -23,6 +24,7 @@ class FirestoreService {
         .doc(id)
         .update({
       'title': title,
+      'desc': descData,
       'colorIndex': colorIndex,
       'timestamp': Timestamp.now()
     });

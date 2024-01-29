@@ -59,6 +59,7 @@ class _EditNotesState extends State<EditNotes> {
         : bgColor[widget.currentcolor];
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text("Edit Note"),
         backgroundColor: newColor,
@@ -66,8 +67,8 @@ class _EditNotesState extends State<EditNotes> {
       backgroundColor: newColor,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await fireStoreService.updateData(
-              widget.docId, titleController.text, themeData.selectedIndex);
+          await fireStoreService.updateData(widget.docId, titleController.text,
+              descController.text, themeData.selectedIndex);
           themeData.isSelectedFalse();
           titleController.clear();
 
@@ -78,25 +79,10 @@ class _EditNotesState extends State<EditNotes> {
       body: Padding(
         padding: const EdgeInsets.all(25.0),
         child: Column(
-          // children: [
-          //   const Align(
-          //     alignment: Alignment.centerLeft,
-          //     child: Text(
-          //       "Title",
-          //       style: TextStyle(fontSize: 40),
-          //     ),
-          //   ),
-          //   SizedBox(
-          //     height: 100,
-          //     width: MediaQuery.of(context).size.width * 0.8,
-          //     child: TextField(
-          //       autocorrect: true,
-          //       controller: titleController,
-          //     ),
-          //   ),
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 100,
+              height: MediaQuery.of(context).size.height * 0.1,
               width: MediaQuery.of(context).size.width * 0.8,
               child: TextField(
                 autocorrect: true,
@@ -105,7 +91,7 @@ class _EditNotesState extends State<EditNotes> {
               ),
             ),
             SizedBox(
-              height: 100,
+              height: MediaQuery.of(context).size.height * 0.6,
               width: MediaQuery.of(context).size.width * 0.8,
               child: TextField(
                 autocorrect: true,
@@ -117,7 +103,6 @@ class _EditNotesState extends State<EditNotes> {
                 controller: descController,
               ),
             ),
-
             InkWell(
                 onTap: () {
                   showModalBottomSheet<void>(
@@ -127,27 +112,14 @@ class _EditNotesState extends State<EditNotes> {
                       });
                 },
                 child: Container(
-                    width: 80,
-                    height: 50,
+                    width: 150,
+                    height: MediaQuery.of(context).size.height * 0.05,
                     decoration: BoxDecoration(
                         color: Colors.grey[200],
                         borderRadius: BorderRadius.circular(10)),
                     child: const Center(
                       child: Text("Color"),
                     )))
-
-            // InkWell(
-            //     onTap: () {
-            //       showModalBottomSheet<void>(
-            //           context: context,
-            //           builder: (BuildContext context) {
-            //             return ColorPicker(themeData: themeData);
-            //           });
-            //     },
-            //     child: Container(
-            //         width: 60,
-            //         decoration: BoxDecoration(color: Colors.grey[200]),
-            //         child: Center(child: const Text("Color"))))
           ],
         ),
       ),

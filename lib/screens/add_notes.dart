@@ -41,6 +41,7 @@ class _AddNotePageState extends State<AddNotePage> {
       canPop: true,
       // onPopInvoked:return true;,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: bgColor[themeData.selectedIndex],
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -77,7 +78,7 @@ class _AddNotePageState extends State<AddNotePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 100,
+                height: MediaQuery.of(context).size.height * 0.1,
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: TextField(
                   autocorrect: true,
@@ -86,7 +87,7 @@ class _AddNotePageState extends State<AddNotePage> {
                 ),
               ),
               SizedBox(
-                height: 100,
+                height: MediaQuery.of(context).size.height * 0.6,
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: TextField(
                   autocorrect: true,
@@ -107,10 +108,10 @@ class _AddNotePageState extends State<AddNotePage> {
                         });
                   },
                   child: Container(
-                      width: 80,
-                      height: 50,
+                      width: 150,
+                      height: MediaQuery.of(context).size.height * 0.05,
                       decoration: BoxDecoration(
-                          color: Colors.grey[200],
+                          color: Colors.grey[500],
                           borderRadius: BorderRadius.circular(10)),
                       child: const Center(
                         child: Text("Color"),

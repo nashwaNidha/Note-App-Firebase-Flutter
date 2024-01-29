@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
-      Image.asset("assets/bg.jpg",
+      Image.asset("assets/bg1.jpg",
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover),
@@ -170,7 +170,12 @@ class _HomePageState extends State<HomePage> {
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(top: 30.0),
-                                          child: Text(desc),
+                                          child: Text(
+                                            desc,
+                                            style: TextStyle(
+                                                overflow:
+                                                    TextOverflow.ellipsis),
+                                          ),
                                         ),
                                       ],
                                     ),
