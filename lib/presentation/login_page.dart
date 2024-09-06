@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:email_validator/email_validator.dart';
 
 import 'package:fb_noteapp/presentation/view/notes/homepage.dart';
@@ -23,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
       fireauth.signInWithEmailAndPassword(
           email: email.text, password: pass.text);
     } on Exception catch (e) {
-      print(e);
+      log(e.toString());
     }
   }
 
@@ -42,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Sign In",
                   style: TextStyle(fontSize: 40),
                 ),
@@ -97,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       loginFn();
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => HomePage(),
+                        builder: (context) => const HomePage(),
                       ));
                     },
                     style: ElevatedButton.styleFrom(
@@ -107,8 +109,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         elevation: 3,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(32.0)),
-                        minimumSize: Size(100, 40),
-                        fixedSize: Size(400, 50)),
+                        minimumSize: const Size(100, 40),
+                        fixedSize: const Size(400, 50)),
                     child: const Text(
                       "Login",
                       style: TextStyle(fontSize: 17),

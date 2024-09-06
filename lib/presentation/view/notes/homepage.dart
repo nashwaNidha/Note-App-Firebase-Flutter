@@ -173,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                                               const EdgeInsets.only(top: 30.0),
                                           child: Text(
                                             desc,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 overflow:
                                                     TextOverflow.ellipsis),
                                           ),
@@ -240,10 +240,10 @@ class _HomePageState extends State<HomePage> {
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => EditNotes(
-                                  currentNote: data['title'],
+                                  currentNote: notes,
                                   currentcolor: selColorIndex,
                                   docId: docID,
-                                  currentDesc: data['desc'],
+                                  currentDesc: desc,
                                 ),
                               ));
                             },
@@ -306,7 +306,7 @@ class _HomePageState extends State<HomePage> {
                                     width: double.infinity,
                                     decoration: BoxDecoration(
                                         color: bgColor[selColorIndex],
-                                        borderRadius: BorderRadius.all(
+                                        borderRadius: const BorderRadius.all(
                                             Radius.circular(10))),
                                     child: Padding(
                                       padding: const EdgeInsets.only(

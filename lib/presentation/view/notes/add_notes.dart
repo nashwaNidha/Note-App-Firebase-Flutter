@@ -83,7 +83,7 @@ class _AddNotePageState extends State<AddNotePage> {
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: TextField(
                   autocorrect: true,
-                  decoration: InputDecoration(hintText: "Title"),
+                  decoration: const InputDecoration(hintText: "Title"),
                   controller: titleController,
                 ),
               ),
@@ -93,7 +93,7 @@ class _AddNotePageState extends State<AddNotePage> {
                 child: TextField(
                   autocorrect: true,
                   maxLines: null,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Description",
                     border: InputBorder.none,
                   ),

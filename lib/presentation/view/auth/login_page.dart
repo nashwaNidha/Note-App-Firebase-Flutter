@@ -1,5 +1,6 @@
-import 'package:email_validator/email_validator.dart';
+import 'dart:developer';
 
+import 'package:email_validator/email_validator.dart';
 import 'package:fb_noteapp/presentation/view/notes/homepage.dart';
 import 'package:fb_noteapp/presentation/view/auth/reg_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
       fireauth.signInWithEmailAndPassword(
           email: email.text, password: pass.text);
     } on Exception catch (e) {
-      print(e);
+      log(e.toString());
     }
   }
 

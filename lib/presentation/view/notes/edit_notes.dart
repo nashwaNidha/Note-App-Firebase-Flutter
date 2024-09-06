@@ -53,8 +53,7 @@ class _EditNotesState extends State<EditNotes> {
 
     titleController.text = widget.currentNote;
     descController.text = widget.currentDesc;
-    var newColor;
-    newColor = themeData.isSelected
+    var newColor = themeData.isSelected
         ? bgColor[themeData.selectedIndex]
         : bgColor[widget.currentcolor];
 
@@ -87,7 +86,7 @@ class _EditNotesState extends State<EditNotes> {
               width: MediaQuery.of(context).size.width * 0.8,
               child: TextField(
                 autocorrect: true,
-                decoration: InputDecoration(hintText: "Title"),
+                decoration: const InputDecoration(hintText: "Title"),
                 controller: titleController,
               ),
             ),
@@ -97,7 +96,7 @@ class _EditNotesState extends State<EditNotes> {
               child: TextField(
                 autocorrect: true,
                 maxLines: null,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "Description",
                   border: InputBorder.none,
                 ),

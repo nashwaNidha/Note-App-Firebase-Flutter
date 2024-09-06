@@ -48,7 +48,7 @@ class _RegScreenState extends State<RegScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Register",
                   style: TextStyle(fontSize: 40),
                 ),
@@ -119,8 +119,8 @@ class _RegScreenState extends State<RegScreen> {
                         elevation: 3,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(32.0)),
-                        minimumSize: Size(100, 40),
-                        fixedSize: Size(400, 50)),
+                        minimumSize: const Size(100, 40),
+                        fixedSize: const Size(400, 50)),
                     child: const Text("SIGN UP"),
                   ),
                 ),
