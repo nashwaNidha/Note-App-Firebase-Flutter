@@ -2,10 +2,10 @@ import 'package:fb_noteapp/providers/colorprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../constants/ksnackbar.dart';
-import '../services/firestore_services.dart';
-import '../themes/color_picker.dart';
-import '../themes/mytheme.dart';
+import '../../../constants/ksnackbar.dart';
+import '../../../services/firestore_services.dart';
+import '../../../themes/color_picker.dart';
+import '../../../themes/mytheme.dart';
 
 class AddNotePage extends StatefulWidget {
   const AddNotePage({
@@ -44,6 +44,7 @@ class _AddNotePageState extends State<AddNotePage> {
         resizeToAvoidBottomInset: false,
         backgroundColor: bgColor[themeData.selectedIndex],
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.amber[50],
           onPressed: () {
             if (titleController.text == '') {
               ScaffoldMessenger.of(context).showSnackBar(terrSnackbar);

@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fb_noteapp/screens/add_notes.dart';
+import 'package:fb_noteapp/presentation/view/notes/add_notes.dart';
 import 'package:fb_noteapp/themes/mytheme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../services/firestore_services.dart';
+import '../../../services/firestore_services.dart';
 import 'edit_notes.dart';
 
 class HomePage extends StatefulWidget {
@@ -55,6 +55,7 @@ class _HomePageState extends State<HomePage> {
                   icon: const Icon(Icons.logout)),
             ]),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.amber[50],
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => const AddNotePage(),

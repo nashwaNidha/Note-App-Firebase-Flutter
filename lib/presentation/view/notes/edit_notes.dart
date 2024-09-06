@@ -2,9 +2,9 @@ import 'package:fb_noteapp/themes/mytheme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/colorprovider.dart';
-import '../services/firestore_services.dart';
-import '../themes/color_picker.dart';
+import '../../../providers/colorprovider.dart';
+import '../../../services/firestore_services.dart';
+import '../../../themes/color_picker.dart';
 
 class EditNotes extends StatefulWidget {
   final String docId;
@@ -66,6 +66,7 @@ class _EditNotesState extends State<EditNotes> {
       ),
       backgroundColor: newColor,
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.amber[50],
         onPressed: () async {
           await fireStoreService.updateData(widget.docId, titleController.text,
               descController.text, themeData.selectedIndex);

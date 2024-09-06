@@ -36,6 +36,7 @@ class _RegScreenState extends State<RegScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
