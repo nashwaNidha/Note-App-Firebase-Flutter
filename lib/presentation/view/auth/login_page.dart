@@ -20,11 +20,20 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
 
   void loginFn() async {
-    try {
-      fireauth.signInWithEmailAndPassword(
-          email: email.text, password: pass.text);
-    } on Exception catch (e) {
-      log(e.toString());
+    if (_formKey.currentState!.validate()) {
+      try {
+        await fireauth.signInWithEmailAndPassword(
+            email: email.text.trim(), password: pass.text.trim());
+      } on FirebaseAuthException catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(e.message ?? "An error occurred")),
+          );
+        }
+        log(e.toString());
+      } catch (e) {
+        log(e.toString());
+      }
     }
   }
 
@@ -97,9 +106,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: ElevatedButton(
                     onPressed: () {
                       loginFn();
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ));
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 38, 62, 103),
@@ -121,7 +127,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Text("Don't have an Account?"),
                     InkWell(
                         onTap: () {
-                          _formKey.currentState!.validate();
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => const RegScreen(),
                           ));
